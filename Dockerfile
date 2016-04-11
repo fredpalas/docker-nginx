@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.9.12
 
 MAINTAINER Camil Blanaru "camil@edka.io"
 
