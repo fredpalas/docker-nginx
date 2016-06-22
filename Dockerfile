@@ -2,10 +2,10 @@ FROM debian:jessie
 
 MAINTAINER Camil Blanaru "camil@edka.io"
 
-ENV NGINX_VERSION 1.11.1-1~jessie
+ENV NGINX_VERSION 1.10.1-1~jessie
 
 RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 						ca-certificates \
@@ -27,6 +27,10 @@ RUN rm -v /etc/nginx/nginx.conf
 
 # Copy a configuration file from the current directory
 ADD nginx.conf /etc/nginx/
+
+#Change www-data UID
+RUN usermod -u 1000 www-data \
+    && groupmod -g 1000 www-data
 
 VOLUME ["/var/cache/nginx"]
 
