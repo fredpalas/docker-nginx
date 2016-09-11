@@ -1,4 +1,4 @@
-FROM nginx:1.11.0
+FROM nginx:1.11.3
 
 MAINTAINER Camil Blanaru "camil@edka.io"
 
